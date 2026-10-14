@@ -1,0 +1,9 @@
+.DS_Store
+outputs/.DS_Store
+outputs/mvp/.env
+outputs/mvp/data.json
+outputs/mvp/data.json.tmp
+outputs/mvp/.venv/
+outputs/mvp/__pycache__/
+outputs/mvp/output/
+work/

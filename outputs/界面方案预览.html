@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智象鲸视 · 界面方案预览</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0d0f14;color:#e8eaf0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;padding:36px 42px}
+  h1{font-size:22px;font-weight:700}
+  .sub{color:#8b93a7;font-size:13px;margin:8px 0 26px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .concept{border-radius:18px;overflow:hidden;border:1px solid #2a2f3a}
+  .concept>.head{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;font-weight:700;font-size:15px;background:#151922;border-bottom:1px solid #2a2f3a}
+  .concept>.head .tags{font-size:11px;color:#8b93a7;font-weight:400}
+  .stage{background:var(--bg);padding:20px;color:var(--text)}
+
+  /* 通用迷你组件（颜色随方案变量走） */
+  .swatches{display:flex;gap:8px;margin-bottom:16px}
+  .sw{width:20px;height:20px;border-radius:6px;border:1px solid rgba(0,0,0,.15)}
+  .row{display:flex;gap:16px;align-items:stretch}
+  .mlogin{flex:0 0 180px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .mlogo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:10px}
+  .mf{font-size:10px;color:var(--muted);margin:8px 0 4px}
+  .mline{height:22px;border-radius:6px;background:var(--card);border:1px solid var(--line)}
+  .mbtn{margin-top:14px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:600}
+  .mapp{flex:1;display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;min-height:210px;background:var(--bg)}
+  .mside{flex:0 0 92px;background:var(--panel);border-right:1px solid var(--line);padding:12px 9px}
+  .mside .mlogo{margin-bottom:14px}
+  .mnav{font-size:10px;color:var(--muted);padding:6px 8px;border-radius:7px;margin-bottom:4px}
+  .mnav.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+  .mcont{flex:1;padding:12px}
+  .mtop{height:26px;border-radius:8px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:10px;margin-bottom:10px}
+  .mtop .badge{font-size:9px;color:var(--muted)}
+  .mcard{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:10px}
+  .msteps{display:flex;gap:6px;margin-bottom:10px}
+  .mstep{font-size:9px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:4px 9px}
+  .mstep.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .tile{height:52px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));opacity:.25;border:1px solid var(--line)}
+
+  /* 方案 A：深色侧边栏 */
+  .cA{--bg:#0f1117;--panel:#181b23;--card:#1e222c;--line:#2a2f3a;--text:#e8eaf0;--muted:#8b93a7;--accent:#4f7cff;--accent2:#7c5cff}
+  /* 方案 B：浅色极简（顶部导航） */
+  .cB{--bg:#f5f6f8;--panel:#ffffff;--card:#eef0f4;--line:#e2e6ec;--text:#1c1f26;--muted:#6b7280;--accent:#2f6bff;--accent2:#5b8cff}
+  .cB .mapp{flex-direction:column}
+  .cB .mside{flex:0 0 auto;width:100%;display:flex;align-items:center;gap:8px;border-right:none;border-bottom:1px solid var(--line);padding:8px 12px}
+  .cB .mside .mlogo{margin:0}
+  .cB .mnav{margin:0}
+  /* 方案 C：暗色沉浸（玻璃拟态） */
+  .cC{--bg:#080a11;--panel:rgba(24,27,35,.78);--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.1);--text:#eef2ff;--muted:#8a93ad;--accent:#22d3ee;--accent2:#8b5cf6}
+  .cC .stage{background:radial-gradient(1000px 500px at 80% -20%,#14203a 0%,#080a11 60%)}
+  /* 方案 D：自然暖色 */
+  .cD{--bg:#f4f1ea;--panel:#fffdf7;--card:#ebe7dc;--line:#ded5c2;--text:#23302b;--muted:#7c8a84;--accent:#2e9e6b;--accent2:#74b894}
+</style>
+</head>
+<body>
+  <h1>智象鲸视 · 视频生成平台 — 界面方案预览</h1>
+  <p class="sub">四种视觉方向，请挑选一个。选定后我会把整个平台按该风格重新套用。🐳 图标为临时占位，待官方 logo 替换。</p>
+
+  <div class="grid">
+    <!-- 方案 A -->
+    <div class="concept">
+      <div class="head">方案 A · 深色侧边栏 <span class="tags">现版风格 · 蓝紫渐变</span></div>
+      <div class="stage cA">
+        <div class="swatches"><span class="sw" style="background:#0f1117"></span><span class="sw" style="background:#181b23"></span><span class="sw" style="background:#4f7cff"></span><span class="sw" style="background:#7c5cff"></span></div>
+        <div class="row">
+          <div class="mlogin">
+            <div class="mlogo">🐳</div>
+            <div class="mf">账号</div><div class="mline"></div>
+            <div class="mf">密码</div><div class="mline"></div>
+            <div class="mbtn">登 录</div>
+          </div>
+          <div class="mapp">
+            <div class="mside">
+              <div class="mlogo">🐳</div>
+              <div class="mnav on">工作台</div><div class="mnav">新建项目</div><div class="mnav">模型切换</div><div class="mnav">模板库</div><div class="mnav">音频库</div><div class="mnav">用量额度</div>
+            </div>
+            <div class="mcont">
+              <div class="mtop">海洋与古建筑 · 项目流水线 <span class="badge">剩余额度 82,400</span></div>
+              <div class="msteps"><span class="mstep on">① 分镜</span><span class="mstep">② 图片</span><span class="mstep">③ 视频</span><span class="mstep">④ 拼接</span></div>
+              <div class="mcard"><div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 方案 B -->
+    <div class="concept">
+      <div class="head">方案 B · 浅色极简 <span class="tags">办公风 · 顶部导航 · 蓝色</span></div>
+      <div class="stage cB">
+        <div class="swatches"><span class="sw" style="background:#f5f6f8"></span><span class="sw" style="background:#ffffff"></span><span class="sw" style="background:#2f6bff"></span><span class="sw" style="background:#5b8cff"></span></div>
+        <div class="row">
+          <div class="mlogin">
+            <div class="mlogo">🐳</div>
+            <div class="mf">账号</div><div class="mline"></div>
+            <div class="mf">密码</div><div class="mline"></div>
+            <div class="mbtn">登 录</div>
+          </div>
+          <div class="mapp">
+            <div class="mside">
+              <div class="mlogo">🐳</div>
+              <div class="mnav on">工作台</div><div class="mnav">新建项目</div><div class="mnav">模型切换</div><div class="mnav">模板库</div><div class="mnav">音频库</div><div class="mnav">用量额度</div>
+            </div>
+            <div class="mcont">
+              <div class="mtop">海洋与古建筑 · 项目流水线 <span class="badge">剩余额度 82,400</span></div>
+              <div class="msteps"><span class="mstep on">① 分镜</span><span class="mstep">② 图片</span><span class="mstep">③ 视频</span><span class="mstep">④ 拼接</span></div>
+              <div class="mcard"><div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 方案 C -->
+    <div class="concept">
+      <div class="head">方案 C · 暗色沉浸 <span class="tags">科技感 · 玻璃拟态 · 青紫</span></div>
+      <div class="stage cC">
+        <div class="swatches"><span class="sw" style="background:#080a11"></span><span class="sw" style="background:#1a1e2b"></span><span class="sw" style="background:#22d3ee"></span><span class="sw" style="background:#8b5cf6"></span></div>
+        <div class="row">
+          <div class="mlogin">
+            <div class="mlogo">🐳</div>
+            <div class="mf">账号</div><div class="mline"></div>
+            <div class="mf">密码</div><div class="mline"></div>
+            <div class="mbtn">登 录</div>
+          </div>
+          <div class="mapp">
+            <div class="mside">
+              <div class="mlogo">🐳</div>
+              <div class="mnav on">工作台</div><div class="mnav">新建项目</div><div class="mnav">模型切换</div><div class="mnav">模板库</div><div class="mnav">音频库</div><div class="mnav">用量额度</div>
+            </div>
+            <div class="mcont">
+              <div class="mtop">海洋与古建筑 · 项目流水线 <span class="badge">剩余额度 82,400</span></div>
+              <div class="msteps"><span class="mstep on">① 分镜</span><span class="mstep">② 图片</span><span class="mstep">③ 视频</span><span class="mstep">④ 拼接</span></div>
+              <div class="mcard"><div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 方案 D -->
+    <div class="concept">
+      <div class="head">方案 D · 自然暖色 <span class="tags">风景主题 · 米白 · 绿色</span></div>
+      <div class="stage cD">
+        <div class="swatches"><span class="sw" style="background:#f4f1ea"></span><span class="sw" style="background:#fffdf7"></span><span class="sw" style="background:#2e9e6b"></span><span class="sw" style="background:#74b894"></span></div>
+        <div class="row">
+          <div class="mlogin">
+            <div class="mlogo">🐳</div>
+            <div class="mf">账号</div><div class="mline"></div>
+            <div class="mf">密码</div><div class="mline"></div>
+            <div class="mbtn">登 录</div>
+          </div>
+          <div class="mapp">
+            <div class="mside">
+              <div class="mlogo">🐳</div>
+              <div class="mnav on">工作台</div><div class="mnav">新建项目</div><div class="mnav">模型切换</div><div class="mnav">模板库</div><div class="mnav">音频库</div><div class="mnav">用量额度</div>
+            </div>
+            <div class="mcont">
+              <div class="mtop">海洋与古建筑 · 项目流水线 <span class="badge">剩余额度 82,400</span></div>
+              <div class="msteps"><span class="mstep on">① 分镜</span><span class="mstep">② 图片</span><span class="mstep">③ 视频</span><span class="mstep">④ 拼接</span></div>
+              <div class="mcard"><div class="tiles"><div class="tile"></div><div class="tile"></div><div class="tile"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
